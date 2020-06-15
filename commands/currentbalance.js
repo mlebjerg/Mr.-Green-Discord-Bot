@@ -2,10 +2,10 @@ exports.run = async (client, message, args, level) => {
   // eslint-disable-line no-unused-vars
   const msg = await message.channel.send("...");
   msg.edit(
-    `Your balance is ${client.balance.get(
+    `Your balance is **${client.balance.get(
       message.guild.id,
       "currentbalance"
-    )}gp`
+    )}gp**`
   );
 };
 

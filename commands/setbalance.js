@@ -4,10 +4,10 @@ exports.run = async (client, message, value, args, level) => {
   const amount = Number.parseInt(value);
   client.balance.set(message.guild.id, amount, "currentbalance");
   msg.edit(
-    `The balance is now ${client.balance.get(
+    `The balance is now **${client.balance.get(
       message.guild.id,
       "currentbalance"
-    )}gp`
+    )}gp**`
   );
 };
 
