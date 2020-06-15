@@ -1,0 +1,10 @@
+version: '3.4'
+
+services:
+  mr.-green-discord-bot:
+    image: mr.-green-discord-bot
+    build: .
+    environment:
+      NODE_ENV: production
+    ports:
+      - 3000
