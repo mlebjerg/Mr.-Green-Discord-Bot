@@ -5,39 +5,47 @@ const fs = require("fs");
 let baseConfig = fs.readFileSync("./config_base.txt", "utf8");
 
 const defaultSettings = {
-  "prefix": "~",
-  "modLogChannel": "mod-log",
-  "modRole": "Moderator",
-  "adminRole": "Administrator",
-  "systemNotice": "true",
-  "welcomeChannel": "welcome",
-  "welcomeMessage": "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
-  "welcomeEnabled": "false"
+  prefix: "!",
+  modLogChannel: "mod-log",
+  modRole: "Moderator",
+  adminRole: "Administrator",
+  systemNotice: "true",
+  welcomeChannel: "welcome",
+  welcomeMessage:
+    "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
+  welcomeEnabled: "false",
 };
 
 const settings = new Enmap({
   name: "settings",
-  cloneLevel: 'deep',
-  ensureProps: true
+  cloneLevel: "deep",
+  ensureProps: true,
 });
 
+const balance = new Enmap({
+  name: "balance",
+  cloneLevel: "deep",
+  ensureProps: true,
+});
+
+balance.set(currentBalance, 0);
 
 let prompts = [
   {
     type: "list",
     name: "resetDefaults",
     message: "Do you want to reset default settings?",
-    choices: ["Yes", "No"]
+    choices: ["Yes", "No"],
   },
   {
     type: "input",
     name: "token",
-    message: "Please enter the bot token from the application page."
+    message: "Please enter the bot token from the application page.",
   },
   {
     type: "input",
     name: "ownerID",
-    message: "Please enter the bot owner's User ID"
+    message: "Please enter the bot owner's User ID",
   },
 ];
 
@@ -46,7 +54,9 @@ let prompts = [
   await settings.defer;
   if (!settings.has("default")) {
     prompts = prompts.slice(1);
-    console.log("First Start! Inserting default guild settings in the database...");
+    console.log(
+      "First Start! Inserting default guild settings in the database..."
+    );
     await settings.set("default", defaultSettings);
   }
 
@@ -65,4 +75,4 @@ let prompts = [
   console.log("REMEMBER TO NEVER SHARE YOUR TOKEN WITH ANYONE!");
   console.log("Configuration has been written, enjoy!");
   await settings.close();
-}());
+})();
