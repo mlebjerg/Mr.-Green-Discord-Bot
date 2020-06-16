@@ -27,7 +27,7 @@ exports.run = async (client, message, value, args, level) => {
       );
     }
   } else {
-    msg.edit("Could not find an amount to add.");
+    msg.edit("Could not find an amount to take.");
   }
 };
 

@@ -7,7 +7,10 @@ exports.run = async (client, message, value, args, level) => {
     value.forEach((i) => {
       string = string + i + " ";
     });
-    const oldBalance = client.balance.get(message.guild.id, "currentbalance");
+    let oldBalance = client.balance.get(message.guild.id, "currentbalance");
+    if (oldBalance === null || oldBalance === undefined) {
+      oldBalance = 0;
+    }
     client.balance.set(message.guild.id, oldBalance + amount, "currentbalance");
 
     msg.edit(
